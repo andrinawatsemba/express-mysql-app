@@ -238,9 +238,9 @@ This project is open-source and available under the [MIT License](LICENSE).
 ---
 
 ## **Author**
-MUSASIZI KENNETH 
-github.com/musasizi
-kennymusasizi@gmail.com
+[MUSASIZI KENNETH]
+[github.com/musasizi]
+[kennymusasizi@gmail.com]
 
 ---
 

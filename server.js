@@ -16,6 +16,7 @@ const db = mysql.createConnection({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
+  port: process.env.DB_PORT
 });
 
 db.connect((err) => {
@@ -26,17 +27,19 @@ db.connect((err) => {
 // Middleware to verify JWT
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-  if (!token) return res.sendStatus(401);
+  const token = authHeader && authHeader.split(' ')[1]; // Format: "Bearer <token>"
+  if (!token) return res.status(401).json({ error: 'Access denied. No token provided.' });
 
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
-    req.user = user;
+    if (err) return res.status(403).json({ error: 'Invalid or expired token.' });
+    req.user = user; // Attach the user payload to the request object
     next();
   });
 };
 
 // Routes
+
+// Register a new user (Public)
 app.post('/register', async (req, res) => {
   const { username, password, email } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -48,6 +51,7 @@ app.post('/register', async (req, res) => {
   });
 });
 
+// Login (Public)
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   const query = 'SELECT * FROM users WHERE username = ?';
@@ -65,6 +69,7 @@ app.post('/login', (req, res) => {
   });
 });
 
+// Get all users (Protected)
 app.get('/users', authenticateToken, (req, res) => {
   const query = 'SELECT id, username, email, created_at FROM users';
   db.query(query, (err, results) => {
@@ -73,6 +78,7 @@ app.get('/users', authenticateToken, (req, res) => {
   });
 });
 
+// Update a user (Protected)
 app.put('/users/:id', authenticateToken, (req, res) => {
   const { username, email } = req.body;
   const userId = req.params.id;
@@ -84,6 +90,7 @@ app.put('/users/:id', authenticateToken, (req, res) => {
   });
 });
 
+// Delete a user (Protected)
 app.delete('/users/:id', authenticateToken, (req, res) => {
   const userId = req.params.id;
   const query = 'DELETE FROM users WHERE id = ?';

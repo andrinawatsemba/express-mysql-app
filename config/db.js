@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   port: 3306,        // ✅ Add the correct port (default for MySQL)
   user: 'root',
-  password: '',      // ✅ Add your password here if you set one in MySQL
+  password: 'andrina',      // ✅ Add your password here if you set one in MySQL
   database: 'student_expenses'
 });
 

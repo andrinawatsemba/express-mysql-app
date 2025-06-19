@@ -1,19 +1,23 @@
+// config/db.js
+
 const mysql = require('mysql2');
-const dotenv = require('dotenv');
 
-dotenv.config();
-
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  port: process.env.DB_PORT
+// Create connection
+const connection = mysql.createConnection({
+  host: 'localhost',
+  port: 3306,        // ✅ Add the correct port (default for MySQL)
+  user: 'root',
+  password: '',      // ✅ Add your password here if you set one in MySQL
+  database: 'student_expenses'
 });
 
-db.connect((err) => {
-  if (err) throw err;
-  console.log('MySQL connected');
+// Connect to database
+connection.connect((err) => {
+  if (err) {
+    console.error('❌ Database connection failed:', err.message);
+    return;
+  }
+  console.log('✅ Connected to MySQL database.');
 });
 
-module.exports = db;
+module.exports = connection;

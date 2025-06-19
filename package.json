@@ -1,7 +1,7 @@
 {
   "name": "express-mysql-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "This project is a comprehensive example of building a RESTful API using **Express.js** and **MySQL**. It includes features like **user authentication**, **CRUD operations for users**, and **association chapters** (e.g., Robotics Chapter, Gaming Chapter, etc.). This project is designed to help students learn Express.js, MySQL, and REST API development in a structured and modular way.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
@@ -12,12 +12,22 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.2",
-    "dotenv": "^16.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.13.0"
+    "mysql": "^2.18.1",
+    "mysql2": "^3.14.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Musasizi/express-mysql-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Musasizi/express-mysql-app/issues"
+  },
+  "homepage": "https://github.com/Musasizi/express-mysql-app#readme"
 }
